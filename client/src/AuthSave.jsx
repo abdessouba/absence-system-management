@@ -5,14 +5,17 @@ import logo from "./assets/main-logo.png";
 import { account, ID } from "./lib/appwrite";
 
 const Authentication = () => {
+  const [isLogin, setIsLogin] = useState(false);
+
   const [loggedInUser, setLoggedInUser] = useState(null);
 
   useEffect(() => {
-    loggedInUser && console.log(loggedInUser);
+    loggedInUser && alert(loggedInUser);
   }, [loggedInUser]);
 
   const handleFormSubmit = async (e) => {
     e.preventDefault();
+    if (isLogin) {
       try {
         await account.createEmailPasswordSession(
           e.target.email.value,
@@ -22,6 +25,20 @@ const Authentication = () => {
       } catch (err) {
         console.log(err);
       }
+    }
+    if (!isLogin) {
+      try {
+        await account.create(
+          ID.unique(),
+          e.target.email.value,
+          e.target.password.value,
+          e.target.fullName.value,
+          e.target.number.value
+        );
+      } catch (error) {
+        console.log(error);
+      }
+    }
   };
   return (
     <main className="w-full h-screen flex">
@@ -37,6 +54,24 @@ const Authentication = () => {
           onSubmit={handleFormSubmit}
           className="flex flex-col gap-3"
         >
+          {!isLogin && (
+            <label className="input input-bordered flex items-center gap-2">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 16 16"
+                fill="currentColor"
+                className="h-4 w-4 opacity-70"
+              >
+                <path d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6ZM12.735 14c.618 0 1.093-.561.872-1.139a6.002 6.002 0 0 0-11.215 0c-.22.578.254 1.139.872 1.139h9.47Z" />
+              </svg>
+              <input
+                type="text"
+                className="grow"
+                name="fullName"
+                placeholder="Full Name"
+              />
+            </label>
+          )}
           <label className="input input-bordered flex items-center gap-2">
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -54,6 +89,27 @@ const Authentication = () => {
               placeholder="Email"
             />
           </label>
+          {!isLogin && (
+            <label className="input input-bordered flex items-center gap-2">
+              <svg
+                fill="currentColor"
+                className="h-4 w-4"
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 512 512"
+              >
+                <path
+                  fill="#787878"
+                  d="M164.9 24.6c-7.7-18.6-28-28.5-47.4-23.2l-88 24C12.1 30.2 0 46 0 64C0 311.4 200.6 512 448 512c18 0 33.8-12.1 38.6-29.5l24-88c5.3-19.4-4.6-39.7-23.2-47.4l-96-40c-16.3-6.8-35.2-2.1-46.3 11.6L304.7 368C234.3 334.7 177.3 277.7 144 207.3L193.3 167c13.7-11.2 18.4-30 11.6-46.3l-40-96z"
+                />
+              </svg>
+              <input
+                type="text"
+                className="grow"
+                name="number"
+                placeholder="Number"
+              />
+            </label>
+          )}
           <label className="input input-bordered flex items-center gap-2">
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -74,17 +130,32 @@ const Authentication = () => {
               placeholder="xxxxxx"
             />
           </label>
-          <div className="-mt-2 mb-2 text-left">
-            <a
-              href=""
-              className="hover:underline hover:text-gray-400 text-sm text-gray-600"
-            >
-              Forget your password ?
-            </a>
-          </div>
-          <button className="btn w-[100px] m-auto">Login</button>
+          {!isLogin && (
+            <label className="label cursor-pointer flex items-center gap-3 w-[90%]">
+              <input
+                type="checkbox"
+                className="checkbox w-5 h-5"
+                name="conditions"
+              />
+              <span className="label-text">
+                By joining iEduc, you accept our Privacy Policy and Terms of
+                Use.
+              </span>
+            </label>
+          )}
+          {isLogin && (
+            <div className="mt-2">
+              <a href="" className="link text-sm text-gray-600">
+                Forget your password?
+              </a>
+            </div>
+          )}
+          {!isLogin && (
+            <button className="btn w-[100px] m-auto">Register</button>
+          )}
+          {isLogin && <button className="btn w-[100px] m-auto">Login</button>}
         </form>
-        {/* <div className="flex justify-between items-center">
+        <div className="flex justify-between items-center">
           <div className="form-control w-fit">
             <label className="label cursor-pointer flex gap-1">
               <input
@@ -93,11 +164,11 @@ const Authentication = () => {
                 className="toggle toggle-sm"
               />
               <span className={isLogin ? "label-text font-bold" : "label-text"}>
-                Admin
+                Login
               </span>
             </label>
           </div>
-        </div> */}
+        </div>
       </section>
     </main>
   );
