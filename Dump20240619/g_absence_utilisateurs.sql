@@ -1,0 +1,58 @@
+-- MySQL dump 10.13  Distrib 8.0.36, for Win64 (x86_64)
+--
+-- Host: 127.0.0.1    Database: g_absence
+-- ------------------------------------------------------
+-- Server version	5.5.5-10.4.32-MariaDB
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!50503 SET NAMES utf8 */;
+/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
+/*!40103 SET TIME_ZONE='+00:00' */;
+/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
+/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+
+--
+-- Table structure for table `utilisateurs`
+--
+
+DROP TABLE IF EXISTS `utilisateurs`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `utilisateurs` (
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `nom` varchar(255) NOT NULL,
+  `prenom` varchar(255) NOT NULL,
+  `adresse` varchar(255) NOT NULL,
+  `ville` varchar(255) NOT NULL,
+  `email` varchar(255) NOT NULL,
+  `password` varchar(255) NOT NULL,
+  `image` varchar(255) NOT NULL DEFAULT 'user.png',
+  `isAdmin` tinyint(1) NOT NULL DEFAULT 0,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `utilisateurs`
+--
+
+LOCK TABLES `utilisateurs` WRITE;
+/*!40000 ALTER TABLE `utilisateurs` DISABLE KEYS */;
+INSERT INTO `utilisateurs` VALUES (1,'hamdan','fouad','rue nouara n34 av khalil','casa','hamdan_fouad@gmail.com','$2y$12$s8jMRJ4jXyQKuZEkDpEdle7DSR0MZOzj4iSKEx1l6ZX49W1sDbETO','user.png',0),(2,'abdessamad','oubahassou','rue nouara n34 av khalil','fes','abde@gmail.com','$2y$12$s8jMRJ4jXyQKuZEkDpEdle7DSR0MZOzj4iSKEx1l6ZX49W1sDbETO','user.png',1),(3,'fochak','saad','fes narjis hay ouafae 2 av ariha n58','FES','saad@gmail.com','$2y$12$s8jMRJ4jXyQKuZEkDpEdle7DSR0MZOzj4iSKEx1l6ZX49W1sDbETO','defaultFormateur.png',1),(4,'salah','abde','cc 234 aasd','casa','hamada@gmail.com','$2y$12$s8jMRJ4jXyQKuZEkDpEdle7DSR0MZOzj4iSKEx1l6ZX49W1sDbETO','defaultFormateur.png',0),(6,'abdelhak','mesk','fes narjis hay ouafae 2 av ariha','FES','youtube@gmail.com','$2y$12$cvDAzbms3jE9nURUnlGs.e6.XDqBADFE6hZSBRqMWHUjiwsXOdGK6','defaultFormateur.png',0),(7,'test','testtest','test@gmail.com','casa','test@gmail.com','$2y$12$nKHmfVF5kHzDQW4V5q.Czuc9.AtLOSSUpYVTdGvdZ.HCtKsN7RDnq','defaultFormateur.png',1);
+/*!40000 ALTER TABLE `utilisateurs` ENABLE KEYS */;
+UNLOCK TABLES;
+/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
+
+/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
+/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
+/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
+
+-- Dump completed on 2024-06-19 19:49:20
